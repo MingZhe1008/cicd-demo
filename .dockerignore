@@ -1,0 +1,6 @@
+.git
+README.md
+Jenkinsfile
+k8s
+scripts
+*.tar

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Launchpad · 发布观察台</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="release.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header><a class="brand" href="#">↗ LAUNCHPAD</a><span>个人 CI/CD 实验室 <i> / </i> 001</span></header>
+  <main>
+    <section class="hero">
+      <div><p class="eyebrow">FROM COMMIT TO CONTAINER</p><h1>一次提交，<br>让改变<span>上线。</span></h1><p class="intro" id="message">你好，这是我的第一次 Kubernetes 发布。</p><div class="actions"><button id="refresh">刷新发布信息 ↗</button><a href="#journey">看看发布路径 ↓</a></div></div>
+      <aside class="release"><div class="release-top"><span>当前页面版本</span><span class="dot">●</span></div><strong id="version">—</strong><p>这份页面随 Docker 镜像一起发布</p><dl><div><dt>GIT COMMIT</dt><dd id="commit">—</dd></div><div><dt>BUILD NUMBER</dt><dd id="build">—</dd></div><div><dt>BUILT AT · UTC</dt><dd id="builtAt">—</dd></div></dl><div class="stamp">BUILD. SHIP. LEARN.</div></aside>
+    </section>
+    <section id="journey" class="journey"><div class="section-title"><h2>代码的旅程</h2><span>流程示意 · 非实时监控</span></div><ol><li><b>01</b><h3>Git</h3><p>提交网页改动</p></li><li><b>02</b><h3>Jenkins</h3><p>检出代码，执行流水线</p></li><li><b>03</b><h3>Docker</h3><p>构建带唯一标签的镜像</p></li><li><b>04</b><h3>Kubernetes</h3><p>滚动更新，交付新页面</p></li></ol></section>
+    <section class="experiment"><span class="eyebrow">YOUR NEXT EXPERIMENT</span><h2>下一次，把这句话改掉。</h2><p>编辑 <code>site/release.js</code> 的版本与文案，提交到 Git。流水线完成后刷新这里，核对版本号和提交记录。</p><button class="secondary" id="copy">复制当前发布信息</button><p id="feedback" role="status" aria-live="polite"></p></section>
+  </main><footer><span>LAUNCHPAD / 学习从一次真实发布开始</span><span>静态前端 · Nginx · K3s</span></footer>
+</body>
+</html>
