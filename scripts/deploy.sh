@@ -10,9 +10,9 @@ ARCHIVE="$(mktemp /tmp/cicd-demo.XXXXXX.tar)"
 trap 'rm -f "$ARCHIVE"' EXIT
 docker build --build-arg GIT_COMMIT="$COMMIT" --build-arg BUILD_NUMBER="$BUILD" --build-arg BUILD_TIME="$(date -u +%Y-%m-%dT%H:%M:%SZ)" -t "$IMAGE" .
 docker save "$IMAGE" -o "$ARCHIVE"
-sudo -n k3s ctr -n k8s.io images import "$ARCHIVE"
-sed "s|__IMAGE__|$IMAGE|g" k8s/deployment.yaml | sudo -n k3s kubectl apply -f -
-sudo -n k3s kubectl rollout status deployment/cicd-demo -n demo --timeout=180s
+sudo -n /usr/local/bin/k3s ctr -n k8s.io images import "$ARCHIVE"
+sed "s|__IMAGE__|$IMAGE|g" k8s/deployment.yaml | sudo -n /usr/local/bin/k3s kubectl apply -f -
+sudo -n /usr/local/bin/k3s kubectl rollout status deployment/cicd-demo -n demo --timeout=180s
 EXPECTED="$(printf '{"commit":"%s","build":"%s"' "$COMMIT" "$BUILD")"
 ACTUAL="$(curl --fail --silent --show-error --max-time 15 "http://192.168.200.100:30081/build.json")"
 [[ "$ACTUAL" == "$EXPECTED"* ]] || { echo 'Smoke check failed: unexpected release'; exit 1; }
